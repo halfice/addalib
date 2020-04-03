@@ -1,0 +1,36 @@
+.panelclassoverrides{
+
+    .ms-DetailsRow-cell{
+     cursor: pointer; 
+     
+    }
+  
+      padding-top: 11px;
+      .ms-font-m{
+          padding-top: 11px;
+          
+      }
+  
+      .HeadingofGrid{
+          font-size: 15px;
+          background-color: blue;
+        }
+  
+        .TotalSummaryGrid
+    {
+      padding-top: 11px;
+      border-top: 1px solid gray;
+      margin-top: 11px;
+      background-color: lightgray;
+      color: dark;
+      font-weight: 100;
+      font-size: 21px;
+    }
+  
+    .myHEadingGrid{
+        padding-left: 11px;
+    }
+  
+    
+  
+  }
