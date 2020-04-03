@@ -18,10 +18,10 @@ import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
 var Symbol = require('es6-symbol/polyfill');
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react';
 import { saveAs } from 'file-saver';
-var FileSaver = require('file-saver');
-
-
-
+//var FileSaver = require('file-saver');
+import "video-react/dist/video-react.css"; // import css
+import { Player } from 'video-react';
+import * as FileSaver from 'file-saver'
 
 export default class Addalibrarcywebpart extends React.Component<IAddalibrarcywebpartProps, {}> {
   public state: IAddalibrarcywebpartProps;
@@ -41,6 +41,7 @@ export default class Addalibrarcywebpart extends React.Component<IAddalibrarcywe
       showPanel: false,
       CurrentVideoUrl: "",
       VideoHeading: "",
+      currentsiteurl: this.props.currentsiteurl,
     }
     this.gettheFolders = this.gettheFolders.bind(this);
     this._onItemInvoked = this._onItemInvoked.bind(this);
@@ -270,7 +271,7 @@ export default class Addalibrarcywebpart extends React.Component<IAddalibrarcywe
     var Arraysx1 = [];
     var counterlist = 1;
     webx.getFileByServerRelativeUrl(url).getBlob().then((blob: Blob) => {
-      // FileSaver.saveAs(blob, filenames);
+      FileSaver.saveAs(blob, filenames);
 
 
     });
@@ -325,7 +326,9 @@ export default class Addalibrarcywebpart extends React.Component<IAddalibrarcywe
       CompleteItemArray[0]["Name"].indexOf(".jpg") > -1 ||
       CompleteItemArray[0]["Name"].indexOf(".otf") > -1 ||
       CompleteItemArray[0]["Name"].indexOf(".doc") > -1) {
-      this.downloadDocument(CompleteItemArray[0]["Name"], CompleteItemArray[0]["serverurls"]);
+      //this.downloadDocument(CompleteItemArray[0]["Name"], CompleteItemArray[0]["serverurls"]);
+      window.open(this.state.currentsiteurl + "/" + CompleteItemArray[0]["serverurls"], "_blank");
+
     } else {
       this.gettheFoldersWithFiles(CompleteItemArray[0]["serverurls"]);
       //serverurls
@@ -391,33 +394,37 @@ export default class Addalibrarcywebpart extends React.Component<IAddalibrarcywe
 
     return (
       <div className={styles.MyDvWholeClassName}>
-      
-          <div >
-            <div>
 
-              <Panel
-                isOpen={this.state.showPanel}
-                type={PanelType.smallFluid}
-                onDismiss={this._hidePanel}
-                headerText={this.state.VideoHeading}
-              >
-                <span>
-                  <div className={styles.foldersdivpadding}>
-                    <PrimaryButton onClick={this._hidePanel.bind(this)}>Close</PrimaryButton>
-                  </div>
+        <div >
+          <div>
+
+            <Panel
+              isOpen={this.state.showPanel}
+              type={PanelType.smallFluid}
+              onDismiss={this._hidePanel}
+              headerText={this.state.VideoHeading}
+            >
+              <span>
+                <div className={styles.foldersdivpadding}>
+                  <PrimaryButton onClick={this._hidePanel.bind(this)}>Close</PrimaryButton>
+                </div>
+
+                <Player
+                  playsInline
+                  poster="/assets/poster.png"
+                  src={this.state.CurrentVideoUrl}
+                />
 
 
-
-
-                </span>
-              </Panel>
-            </div>
-         
-         
-         
+              </span>
+            </Panel>
           </div>
 
-          <div className="panelclassoverrides">
+
+
+        </div>
+
+        <div className="panelclassoverrides">
           <Breadcrumb
             items={this.state.FolderList}
             ariaLabel={'Breadcrumb with no maxDisplayedItems'}
@@ -439,7 +446,7 @@ export default class Addalibrarcywebpart extends React.Component<IAddalibrarcywe
           />
 
         </div>
-       
+
       </div>
     );
 
@@ -448,7 +455,9 @@ export default class Addalibrarcywebpart extends React.Component<IAddalibrarcywe
       var tempname = column.fieldName;
 
       var CheckIsIemorNot = "";
-
+      var azizi="https://azizi021.sharepoint.com/sites/MyArabicSite/SiteAssets";
+      var adda="https://abudhabidigital.sharepoint.com/sites/dev/SiteAssets";
+      var final=adda;
 
 
       switch (column.key) {

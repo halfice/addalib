@@ -18,5 +18,6 @@ export interface IAddalibrarcywebpartProps {
   showPanel: boolean;
   CurrentVideoUrl:string;
   VideoHeading:string;
+  currentsiteurl:string;
   
 }

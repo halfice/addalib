@@ -10,7 +10,7 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'AddalibrarcywebpartWebPartStrings';
 import Addalibrarcywebpart from './components/Addalibrarcywebpart';
 import { IAddalibrarcywebpartProps } from './components/IAddalibrarcywebpartProps';
-
+require('../panelclassoverrides.scss');
 export interface IAddalibrarcywebpartWebPartProps {
   description: string;
   ListNames: string;
@@ -27,6 +27,7 @@ export default class AddalibrarcywebpartWebPart extends BaseClientSideWebPart <I
         SiteUrl: this.properties.targetsite,
         spHttpClient: this.context.spHttpClient,
         LibraryName: this.properties.ListNames,
+        currentsiteurl:this.context.pageContext.web.absoluteUrl
       }
     );
 
